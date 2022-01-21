@@ -80,6 +80,8 @@ Shader::Shader(const std::string& vertexShader, const std::string& fragmentShade
     program_id = createShader(vertexShader, fragmentShader);
 }
 
+Shader::~Shader() { glDeleteProgram(program_id); }
+
 void Shader::Bind() { glUseProgram(program_id); }
 
 void Shader::UnBind() { glUseProgram(0); }
