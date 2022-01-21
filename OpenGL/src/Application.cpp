@@ -1,18 +1,20 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <glm/glm.hpp>
+#include <iostream>
+#include <string>
 
 struct Shaders {
     std::string vertexShader;
     std::string fragmentShader;
 };
 
-static Shaders importShader(const std::string& filename) {
+static Shaders importShader(const std::string& filename)
+{
     std::ifstream myFile(filename.c_str());
     std::string line;
-    Shaders shaders = {"", ""};
+    Shaders shaders = { "", "" };
     int type = 0;
     while (getline(myFile, line)) {
         if (line.find("#shader") != std::string::npos) {
@@ -32,7 +34,8 @@ static Shaders importShader(const std::string& filename) {
     return shaders;
 }
 
-static unsigned int compileShader(unsigned int type, const std::string& source) {
+static unsigned int compileShader(unsigned int type, const std::string& source)
+{
     unsigned int id = glCreateShader(type);
     const char* src = source.c_str();
     glShaderSource(id, 1, &src, nullptr);
@@ -56,7 +59,8 @@ static unsigned int compileShader(unsigned int type, const std::string& source) 
     return id;
 }
 
-static unsigned int createShader(const std::string& vertexShader, const std::string& fragmentShader) {
+static unsigned int createShader(const std::string& vertexShader, const std::string& fragmentShader)
+{
     unsigned int program = glCreateProgram();
     unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
     unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
@@ -98,11 +102,15 @@ int main(void)
     }
 
     float positions[] = {
-        -0.5f, -0.5f,
-        -0.5f, 0.5f,
-         0.5f, 0.5f,
+        -0.5f,
+        -0.5f,
+        -0.5f,
+        0.5f,
+        0.5f,
+        0.5f,
 
-         0.5f, -0.5f,
+        0.5f,
+        -0.5f,
     };
 
     unsigned int indecis[] = {
@@ -147,7 +155,7 @@ int main(void)
     }
     float color_jump = 0.01f;
     float r = 0.0f;
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     /* Loop until the user closes the window */
