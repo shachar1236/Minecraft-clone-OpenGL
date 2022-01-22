@@ -2,14 +2,14 @@
 #version 330 core
 
 layout(location = 0) in vec4 position;
-layout(location = 1) in float red_color;
+// layout(location = 1) in float red_color;
 
 out float out_red_color;
 
 void main() 
 {
     gl_Position = position;
-    out_red_color = red_color;
+    out_red_color = 0.4;
 };
 
 #shader fragment

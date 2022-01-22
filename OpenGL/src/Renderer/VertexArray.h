@@ -9,7 +9,7 @@ public:
     VertexArray();
     ~VertexArray();
 
-    std::shared_ptr<VertexArray> Create();
+    static std::shared_ptr<VertexArray> Create();
 
     void Bind();
     void UnBind();

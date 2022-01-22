@@ -1,6 +1,7 @@
-#include "IndexBuffer.h"
-#include "VertexArray.h"
-#include "VertexBuffer.h"
+#include "../Renderer/IndexBuffer.h"
+#include "../Renderer/Shader.h"
+#include "../Renderer/VertexArray.h"
+#include "../Renderer/VertexBuffer.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <fstream>
@@ -106,10 +107,10 @@ int main(void)
     }
 
     float positions[] = {
-        -0.5f, -0.5f, 0.5f, //
-        -0.5f, 0.5f, 0.5f, //
-        0.5f, 0.5f, 0.5f, //
-        0.5f, -0.5f, 0.5f //
+        -0.5f, -0.5f, //
+        -0.5f, 0.5f, //
+        0.5f, 0.5f, //
+        0.5f, -0.5f, //
     };
 
     unsigned int indecis[] = {
@@ -117,6 +118,8 @@ int main(void)
         2, 3, 0 // second triange
     };
 
+    std::shared_ptr<VertexArray> vertexArray = VertexArray::Create();
+    vertexArray->Bind();
     // unsigned int buffer = 0;
     // // genereting buffer
     // glGenBuffers(1, &buffer);
@@ -124,43 +127,50 @@ int main(void)
     // glBindBuffer(GL_ARRAY_BUFFER, buffer);
     // // setting buffer data
     // glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), positions, GL_STATIC_DRAW);
-    std::shared_ptr<VertexBuffer> buffer = std::make_shared()
+    std::shared_ptr<VertexBuffer> buffer = VertexBuffer::Create(positions, 8 * sizeof(float), GL_STATIC_DRAW);
 
-        // setting vertex attribute so the GPU will know how to draw
-        glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
     // setting vertex attribute so the GPU will know how to draw
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(8));
+    // glEnableVertexAttribArray(0);
+    // glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    // // setting vertex attribute so the GPU will know how to draw
+    // glEnableVertexAttribArray(1);
+    // glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(8));
+    buffer->layout.addElement(BufferElement(2, sizeof(float) * 2, GL_FLOAT, GL_FALSE));
+    // buffer->layout.addElement(BufferElement(1, sizeof(float) * 1, GL_FLOAT, GL_FALSE));
 
-    // setting index buffer
-    unsigned int ibo = 0;
-    // genereting buffer
-    glGenBuffers(1, &ibo);
-    // binding buffer
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    // setting buffer data
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indecis, GL_STATIC_DRAW);
+    vertexArray->AddVertexBuffer(buffer);
+    // // setting index buffer
+    // unsigned int ibo = 0;
+    // // genereting buffer
+    // glGenBuffers(1, &ibo);
+    // // binding buffer
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    // // setting buffer data
+    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indecis, GL_STATIC_DRAW);
+    std::shared_ptr<IndexBuffer> ibo = IndexBuffer::Create(indecis, 6 * sizeof(float), GL_STATIC_DRAW);
+    vertexArray->SetIndexBuffer(ibo);
     // importing shder from file
-    Shaders source = importShader("res/shaders/Basic.shader");
-    std::cout << source.vertexShader << std::endl;
-    std::cout << source.fragmentShader << std::endl;
+    // Shaders source = importShader("res/shaders/Basic.shader");
+    // std::cout << source.vertexShader << std::endl;
+    // std::cout << source.fragmentShader << std::endl;
 
-    // creating and compiling the shader
-    unsigned int shader = createShader(source.vertexShader, source.fragmentShader);
-    // using the shader
-    glUseProgram(shader);
-    // get uniform id
-    // int location = glGetUniformLocation(shader, "u_Color");
-    // if (location == -1) {
-    //     std::cout << "Error: didnt find the uniform" << std::endl;
-    //     return -1;
-    // }
-    float color_jump = 0.01f;
-    float r = 0.0f;
+    // // creating and compiling the shader
+    // unsigned int shader = createShader(source.vertexShader, source.fragmentShader);
+    // // using the shader
+    // glUseProgram(shader);
+    // // get uniform id
+    // // int location = glGetUniformLocation(shader, "u_Color");
+    // // if (location == -1) {
+    // //     std::cout << "Error: didnt find the uniform" << std::endl;
+    // //     return -1;
+    // // }
+    // float color_jump = 0.01f;
+    // float r = 0.0f;
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+    // glBindBuffer(GL_ARRAY_BUFFER, 0);
+    Shader shader = Shader("res/shaders/Basic.shader");
+    shader.Bind();
+    vertexArray->Bind();
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
@@ -180,7 +190,7 @@ int main(void)
         glfwPollEvents();
     }
     // deleting the shader
-    glDeleteProgram(shader);
+    // glDeleteProgram(shader);
 
     glfwTerminate();
     return 0;

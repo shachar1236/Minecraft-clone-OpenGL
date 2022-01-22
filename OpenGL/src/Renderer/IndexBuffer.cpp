@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-IndexBuffer::IndexBuffer(const float* buffer, const unsigned int& size, const unsigned int& usage)
+IndexBuffer::IndexBuffer(const unsigned int* buffer, const unsigned int& size, const unsigned int& usage)
 {
     glGenBuffers(1, &id);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
@@ -12,7 +12,7 @@ IndexBuffer::IndexBuffer(const float* buffer, const unsigned int& size, const un
 IndexBuffer::~IndexBuffer() { glDeleteBuffers(1, &id); }
 
 std::shared_ptr<IndexBuffer> IndexBuffer::Create(
-    const float* buffer, const unsigned int& size, const unsigned int& usage)
+    const unsigned int* buffer, const unsigned int& size, const unsigned int& usage)
 {
     return std::make_shared<IndexBuffer>(buffer, size, usage);
 }

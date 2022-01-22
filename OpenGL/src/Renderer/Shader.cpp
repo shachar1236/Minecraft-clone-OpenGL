@@ -75,9 +75,10 @@ static unsigned int createShader(const std::string& vertexShader, const std::str
     return program;
 }
 
-Shader::Shader(const std::string& vertexShader, const std::string& fragmentShader)
+Shader::Shader(const std::string& shaderPath)
 {
-    program_id = createShader(vertexShader, fragmentShader);
+    Shaders shaders = importShader(shaderPath);
+    program_id = createShader(shaders.vertexShader, shaders.fragmentShader);
 }
 
 Shader::~Shader() { glDeleteProgram(program_id); }

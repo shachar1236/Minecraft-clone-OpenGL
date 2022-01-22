@@ -2,22 +2,6 @@
 #include <memory>
 #include <vector>
 
-class VertexBuffer {
-public:
-    VertexBuffer(const float* buffer, const unsigned int& size, const unsigned int& usage);
-    ~VertexBuffer();
-
-    std::shared_ptr<VertexBuffer> Create(const float* buffer, const unsigned int& size, const unsigned int& usage);
-
-    void Bind();
-    void UnBind();
-
-    BufferLayout layout;
-
-private:
-    unsigned int id;
-};
-
 struct BufferElement {
     unsigned int count; // count of data
     unsigned int size; // size of data in bytes
@@ -35,7 +19,7 @@ struct BufferElement {
 };
 
 struct BufferLayout {
-    BufferLayout();
+    BufferLayout() : stride(0) { }
 
     void addElement(const BufferElement& element)
     {
@@ -52,4 +36,23 @@ struct BufferLayout {
 private:
     std::vector<BufferElement> elements;
     unsigned int stride;
+};
+
+class VertexBuffer {
+public:
+    VertexBuffer();
+
+    VertexBuffer(const float* buffer, const unsigned int& size, const unsigned int& usage);
+    ~VertexBuffer();
+
+    static std::shared_ptr<VertexBuffer> Create(
+        const float* buffer, const unsigned int& size, const unsigned int& usage);
+
+    void Bind();
+    void UnBind();
+
+    BufferLayout layout;
+
+private:
+    unsigned int id;
 };
