@@ -102,15 +102,10 @@ int main(void)
     }
 
     float positions[] = {
-        -0.5f,
-        -0.5f,
-        -0.5f,
-        0.5f,
-        0.5f,
-        0.5f,
-
-        0.5f,
-        -0.5f,
+        -0.5f, -0.5f, 0.5f, //
+        -0.5f, 0.5f, 0.5f, //
+        0.5f, 0.5f, 0.5f, //
+        0.5f, -0.5f, 0.5f //
     };
 
     unsigned int indecis[] = {
@@ -124,11 +119,14 @@ int main(void)
     // binding buffer
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     // setting buffer data
-    glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), positions, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), positions, GL_STATIC_DRAW);
 
     // setting vertex attribute so the GPU will know how to draw
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    // setting vertex attribute so the GPU will know how to draw
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(8));
 
     // setting index buffer
     unsigned int ibo = 0;
@@ -148,11 +146,11 @@ int main(void)
     // using the shader
     glUseProgram(shader);
     // get uniform id
-    int location = glGetUniformLocation(shader, "u_Color");
-    if (location == -1) {
-        std::cout << "Error: didnt find the uniform" << std::endl;
-        return -1;
-    }
+    // int location = glGetUniformLocation(shader, "u_Color");
+    // if (location == -1) {
+    //     std::cout << "Error: didnt find the uniform" << std::endl;
+    //     return -1;
+    // }
     float color_jump = 0.01f;
     float r = 0.0f;
 
@@ -164,11 +162,11 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         // set uniform value
-        glUniform4f(location, r, 0.8f, 0.4f, 1.0f);
-        r += color_jump;
-        if (r > 1.0f || r < 0.0f) {
-            color_jump *= -1;
-        }
+        // glUniform4f(location, r, 0.8f, 0.4f, 1.0f);
+        // r += color_jump;
+        // if (r > 1.0f || r < 0.0f) {
+        //     color_jump *= -1;
+        // }
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
