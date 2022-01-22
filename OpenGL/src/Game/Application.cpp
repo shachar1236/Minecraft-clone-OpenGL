@@ -1,8 +1,12 @@
+#include "IndexBuffer.h"
+#include "VertexArray.h"
+#include "VertexBuffer.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <fstream>
 #include <glm/glm.hpp>
 #include <iostream>
+#include <memory>
 #include <string>
 
 struct Shaders {
@@ -113,16 +117,17 @@ int main(void)
         2, 3, 0 // second triange
     };
 
-    unsigned int buffer = 0;
-    // genereting buffer
-    glGenBuffers(1, &buffer);
-    // binding buffer
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    // setting buffer data
-    glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), positions, GL_STATIC_DRAW);
+    // unsigned int buffer = 0;
+    // // genereting buffer
+    // glGenBuffers(1, &buffer);
+    // // binding buffer
+    // glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    // // setting buffer data
+    // glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), positions, GL_STATIC_DRAW);
+    std::shared_ptr<VertexBuffer> buffer = std::make_shared()
 
-    // setting vertex attribute so the GPU will know how to draw
-    glEnableVertexAttribArray(0);
+        // setting vertex attribute so the GPU will know how to draw
+        glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
     // setting vertex attribute so the GPU will know how to draw
     glEnableVertexAttribArray(1);

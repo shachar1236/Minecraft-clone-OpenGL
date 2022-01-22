@@ -11,6 +11,12 @@ IndexBuffer::IndexBuffer(const float* buffer, const unsigned int& size, const un
 
 IndexBuffer::~IndexBuffer() { glDeleteBuffers(1, &id); }
 
+std::shared_ptr<IndexBuffer> IndexBuffer::Create(
+    const float* buffer, const unsigned int& size, const unsigned int& usage)
+{
+    return std::make_shared<IndexBuffer>(buffer, size, usage);
+}
+
 void IndexBuffer::Bind() { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id); }
 
 void IndexBuffer::UnBind() { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }

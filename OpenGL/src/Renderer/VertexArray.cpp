@@ -6,6 +6,8 @@ VertexArray::VertexArray() { glCreateVertexArrays(1, &id); }
 
 VertexArray::~VertexArray() { glDeleteVertexArrays(1, &id); }
 
+std::shared_ptr<VertexArray> VertexArray::Create() { return std::make_shared<VertexArray>(); }
+
 void VertexArray::Bind() { glBindVertexArray(id); }
 
 void VertexArray::UnBind() { glBindVertexArray(0); }

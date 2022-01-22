@@ -1,9 +1,13 @@
 #pragma once
+#include <memory>
 #include <vector>
+
 class VertexBuffer {
 public:
     VertexBuffer(const float* buffer, const unsigned int& size, const unsigned int& usage);
     ~VertexBuffer();
+
+    std::shared_ptr<VertexBuffer> Create(const float* buffer, const unsigned int& size, const unsigned int& usage);
 
     void Bind();
     void UnBind();
