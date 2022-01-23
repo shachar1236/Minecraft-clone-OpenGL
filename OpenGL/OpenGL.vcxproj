@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Logic\Entity.cpp" />
+    <ClCompile Include="src\Logic\ECS.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Renderer\IndexBuffer.cpp" />
     <ClCompile Include="src\Renderer\Shader.cpp" />
@@ -30,6 +32,8 @@
     <None Include="res\shaders\Basic.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Logic\Entity.h" />
+    <ClInclude Include="src\Logic\ECS.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Renderer\IndexBuffer.h" />
     <ClInclude Include="src\Renderer\Shader.h" />
@@ -107,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\;$(ProjectDir)\src\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\;$(ProjectDir)\src\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
