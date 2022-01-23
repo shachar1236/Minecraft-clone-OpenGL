@@ -1,12 +1,15 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <map>
+#include <memory>
 #include <string>
 
 class Shader {
 public:
     Shader(const std::string& shaderPath);
     ~Shader();
+
+    static std::shared_ptr<Shader> Create(const std::string& shaderPath);
 
     void Bind();
     void UnBind();

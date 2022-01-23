@@ -2,8 +2,10 @@
 #include "Entity.h"
 #include <algorithm>
 #include <memory>
+#include <string>
 #include <vector>
 
+namespace Logic {
 class ECS {
 public:
     static std::vector<std::shared_ptr<Entity>> entities;
@@ -17,6 +19,7 @@ public:
 
     static int GetNewId();
 
-private:
     static int lastId;
 };
+
+}

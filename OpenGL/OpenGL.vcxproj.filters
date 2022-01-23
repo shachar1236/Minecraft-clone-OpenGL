@@ -36,6 +36,12 @@
     <ClCompile Include="src\Logic\ECS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Renderer\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\Box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Logic\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,6 +69,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Logic\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\DrawObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,5 +8,5 @@ struct DrawObject {
 public:
     std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<Mesh> mesh;
-    std::shared_ptr<Mesh> transform;
+    Transform* transform;
 };

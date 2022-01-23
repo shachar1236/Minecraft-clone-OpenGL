@@ -1,5 +1,10 @@
 #include "ECS.h"
 
+using namespace Logic;
+
+std::vector<std::shared_ptr<Entity>> ECS::entities = std::vector<std::shared_ptr<Entity>>();
+int ECS::lastId = -1;
+
 void ECS::Update(const float& deltaTime)
 {
     for (auto entity : entities) {
@@ -11,9 +16,10 @@ void ECS::AddEntity(const std::shared_ptr<Entity>& entity) { entities.push_back(
 
 std::shared_ptr<Entity> ECS::GetEntity(const std::string& name)
 {
-    auto e = std::find(entities.begin(), entities.end(), name);
-    if (e != entities.end()) {
-        return (*e);
+    for (auto& entity : entities) {
+        if (entity->name == name) {
+            return entity;
+        }
     }
     return 0;
 }

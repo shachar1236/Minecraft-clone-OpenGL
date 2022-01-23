@@ -83,6 +83,8 @@ Shader::Shader(const std::string& shaderPath)
 
 Shader::~Shader() { glDeleteProgram(program_id); }
 
+std::shared_ptr<Shader> Shader::Create(const std::string& shaderPath) { return std::make_shared<Shader>(shaderPath); }
+
 void Shader::Bind() { glUseProgram(program_id); }
 
 void Shader::UnBind() { glUseProgram(0); }

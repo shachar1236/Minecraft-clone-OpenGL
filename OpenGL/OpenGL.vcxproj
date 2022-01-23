@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\Box.cpp" />
     <ClCompile Include="src\Logic\Entity.cpp" />
+    <ClCompile Include="src\Renderer\Mesh.cpp" />
     <ClCompile Include="src\Logic\ECS.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Renderer\IndexBuffer.cpp" />
@@ -32,6 +34,9 @@
     <None Include="res\shaders\Basic.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Game\Box.h" />
+    <ClInclude Include="src\Renderer\DrawObject.h" />
+    <ClInclude Include="src\Renderer\Mesh.h" />
     <ClInclude Include="src\Logic\Entity.h" />
     <ClInclude Include="src\Logic\ECS.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
@@ -39,6 +44,7 @@
     <ClInclude Include="src\Renderer\Shader.h" />
     <ClInclude Include="src\Renderer\VertexArray.h" />
     <ClInclude Include="src\Renderer\VertexBuffer.h" />
+    <ClInclude Include="src\Renderer\Transform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
