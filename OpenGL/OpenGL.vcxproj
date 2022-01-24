@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Core\Core.cpp" />
+    <ClCompile Include="src\Renderer\Camera.cpp" />
     <ClCompile Include="src\Game\Box.cpp" />
     <ClCompile Include="src\Logic\Entity.cpp" />
     <ClCompile Include="src\Renderer\Mesh.cpp" />
@@ -34,6 +36,8 @@
     <None Include="res\shaders\Basic.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Core\Core.h" />
+    <ClInclude Include="src\Renderer\Camera.h" />
     <ClInclude Include="src\Game\Box.h" />
     <ClInclude Include="src\Renderer\DrawObject.h" />
     <ClInclude Include="src\Renderer\Mesh.h" />

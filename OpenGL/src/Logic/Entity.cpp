@@ -8,4 +8,6 @@ Entity::Entity(std::string name_)
     id = ECS::GetNewId();
     // Setup();
 }
+
+DrawObject Entity::getDrawObject() { return { nullptr, nullptr, nullptr }; }
 }

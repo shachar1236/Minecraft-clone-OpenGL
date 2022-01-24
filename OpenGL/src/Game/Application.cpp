@@ -1,4 +1,5 @@
 #include "Box.h"
+#include "Core/Core.h"
 #include "Logic/ECS.h"
 #include "Logic/Entity.h"
 #include "Renderer/IndexBuffer.h"
@@ -16,6 +17,7 @@
 int main(void)
 {
     GLFWwindow* window;
+    auto logger = Log::createLogger("Main");
 
     /* Initialize the library */
     if (!glfwInit())
@@ -46,10 +48,11 @@ int main(void)
     float lastFrameTime = 0.0f;
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
         float time = glfwGetTime();
         deltaTime = time - lastFrameTime;
         lastFrameTime = time;
+        glClear(GL_COLOR_BUFFER_BIT);
+        // logger->info("hi");
 
         Logic::ECS::Update(deltaTime);
 
