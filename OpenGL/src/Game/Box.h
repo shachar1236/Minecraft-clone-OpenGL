@@ -12,12 +12,10 @@ public:
     std::shared_ptr<Transform> transform;
 
     float r = 0;
-    float color_jump = 0.01f;
+    float color_jump = 0.8f;
 
     Box(const std::string& name)
-        : Logic::Entity(name) {
-            // Setup();
-        };
+        : Logic::Entity(name) {};
     virtual void Setup() override;
     virtual void Update(const float& deltaTime) override;
 

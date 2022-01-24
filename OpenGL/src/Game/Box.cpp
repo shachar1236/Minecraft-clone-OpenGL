@@ -1,6 +1,7 @@
 #include "Box.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 void Box::Setup()
 {
@@ -34,7 +35,7 @@ void Box::Setup()
 
 void Box::Update(const float& deltaTime)
 {
-    r += color_jump;
+    r += color_jump * deltaTime;
     if (r > 1.0f || r < 0.0f) {
         color_jump *= -1;
     }

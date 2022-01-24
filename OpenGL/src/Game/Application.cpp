@@ -42,11 +42,16 @@ int main(void)
     Logic::ECS::AddEntity(box);
 
     /* Loop until the user closes the window */
+    float deltaTime = 1.0f;
+    float lastFrameTime = 0.0f;
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+        float time = glfwGetTime();
+        deltaTime = time - lastFrameTime;
+        lastFrameTime = time;
 
-        Logic::ECS::Update(1);
+        Logic::ECS::Update(deltaTime);
 
         DrawObject boxDraw = box->getDrawObject();
         boxDraw.mesh->set_uniforms_and_shader();
