@@ -3,6 +3,9 @@
 #include <GLFW/glfw3.h>
 #include <fstream>
 #include <iostream>
+#include <unordered_map>
+
+static std::unordered_map<std::string, std::shared_ptr<Shader>> ShaderLibrary;
 
 struct Shaders {
     std::string vertexShader;
@@ -83,7 +86,27 @@ Shader::Shader(const std::string& shaderPath)
 
 Shader::~Shader() { glDeleteProgram(program_id); }
 
-std::shared_ptr<Shader> Shader::Create(const std::string& shaderPath) { return std::make_shared<Shader>(shaderPath); }
+std::shared_ptr<Shader> Shader::Create(const std::string& shaderPath)
+{
+    int lastSlash = shaderPath.find_last_of("/\\");
+    int lastDot = shaderPath.rfind(".");
+    if (lastDot == std::string::npos || lastSlash == std::string::npos) {
+        std::cout << "Error: shader path not found" << std::endl;
+        _exit(1);
+    }
+
+    std::string cpPath = shaderPath;
+
+    std::string name = std::string(cpPath.c_str() + lastSlash + 1, lastDot - lastSlash - 1);
+    auto shaderLibraryShader = ShaderLibrary.find(name);
+    if (shaderLibraryShader != ShaderLibrary.end()) {
+        return shaderLibraryShader->second;
+    }
+
+    auto s = std::make_shared<Shader>(shaderPath);
+    ShaderLibrary[name] = s;
+    return s;
+}
 
 void Shader::Bind() { glUseProgram(program_id); }
 
@@ -152,4 +175,16 @@ void Shader::SetUniformVec4f(const std::string& name, const glm::vec4& value)
         uniform_location = location->second;
     }
     glUniform4f(uniform_location, value.x, value.y, value.z, value.w);
+}
+
+std::shared_ptr<Shader> Shader::LoadShader(std::string path) { return Shader::Create(path); }
+
+std::shared_ptr<Shader> Shader::GetShader(std::string name)
+{
+    auto shader = ShaderLibrary.find(name);
+    if (shader == ShaderLibrary.end()) {
+        std::cout << "Error: cant find shader" << std::endl;
+        return nullptr;
+    }
+    return shader->second;
 }

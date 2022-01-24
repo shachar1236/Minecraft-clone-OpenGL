@@ -12,7 +12,11 @@ void ECS::Update(const float& deltaTime)
     }
 }
 
-void ECS::AddEntity(const std::shared_ptr<Entity>& entity) { entities.push_back(entity); }
+void ECS::AddEntity(const std::shared_ptr<Entity>& entity)
+{
+    entity->Setup();
+    entities.push_back(entity);
+}
 
 std::shared_ptr<Entity> ECS::GetEntity(const std::string& name)
 {

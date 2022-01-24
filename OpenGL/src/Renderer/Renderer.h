@@ -1,5 +1,6 @@
 #pragma once
-class Renderer
-{
+#include <memory>
+class Renderer {
+public:
+    static std::unique_ptr<Renderer> renderer;
 };
-

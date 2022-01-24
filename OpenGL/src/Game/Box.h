@@ -15,10 +15,9 @@ public:
     float color_jump = 0.01f;
 
     Box(const std::string& name)
-        : Logic::Entity(name)
-    {
-        Setup();
-    };
+        : Logic::Entity(name) {
+            // Setup();
+        };
     virtual void Setup() override;
     virtual void Update(const float& deltaTime) override;
 
