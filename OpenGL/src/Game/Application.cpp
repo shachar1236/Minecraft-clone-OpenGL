@@ -2,6 +2,7 @@
 #include "Core/Core.h"
 #include "Logic/ECS.h"
 #include "Logic/Entity.h"
+#include "Logic/Input.h"
 #include "Renderer/Camera.h"
 #include "Renderer/IndexBuffer.h"
 #include "Renderer/Shader.h"
@@ -32,6 +33,7 @@ int main(void)
     srand(GetCurrentProcessId());
 
     GLFWwindow* window;
+    Logic::Input::_window = window;
     auto logger = Log::createLogger("Main");
 
     /* Initialize the library */
