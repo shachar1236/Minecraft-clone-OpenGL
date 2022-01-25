@@ -146,7 +146,7 @@ void Box::Update(const float& deltaTime)
     }
 
     rotation += deltaTime * 20;
-    transform->setRotation(rotation, glm::vec3(1.0f));
+    // transform->setRotation(rotation, glm::vec3(1.0f));
 }
 
 DrawObject Box::getDrawObject() { return { va, mesh, &(*transform) }; }

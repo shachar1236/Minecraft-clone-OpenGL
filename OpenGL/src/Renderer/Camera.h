@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/Core.h"
 #include "Logic/Entity.h"
 #include <glm/glm.hpp>
 
@@ -28,4 +29,8 @@ private:
     glm::vec3 position;
 
     glm::vec3 cameraFront;
+
+    glm::vec3 cameraUp;
+
+    static std::shared_ptr<spdlog::logger> logger;
 };

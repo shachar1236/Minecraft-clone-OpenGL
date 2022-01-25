@@ -33,7 +33,6 @@ int main(void)
     srand(GetCurrentProcessId());
 
     GLFWwindow* window;
-    Logic::Input::_window = window;
     auto logger = Log::createLogger("Main");
 
     /* Initialize the library */
@@ -57,6 +56,7 @@ int main(void)
         return -1;
     }
 
+    Logic::Input::_window = window;
     glDebugMessageCallback(MessageCallback, 0);
     // glEnable(GL_CULL_FACE);
     // glFrontFace(GL_CW);
