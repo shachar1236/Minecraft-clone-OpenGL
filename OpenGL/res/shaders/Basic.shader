@@ -2,17 +2,18 @@
 #version 330 core
 
 layout(location = 0) in vec4 position;
-// layout(location = 1) in float red_color;
 
 // out float out_red_color;
+out vec4 out_color;
 uniform mat4 u_ViewProjection;
 uniform mat4 u_Transform;
 
 void main() 
 {
     // gl_Position = position;
+    // gl_Position = u_ViewProjection * u_Transform * vec4(position, 1.0f);
     gl_Position = u_ViewProjection * u_Transform * position;
-    // out_red_color = 0.4;
+    out_color = vec4(position.x * 0.5 + 0.5, position.y * 0.5 + 0.5, position.z * 0.5 + 0.5, 1.0f);
 };
 
 #shader fragment
@@ -21,10 +22,10 @@ void main()
 layout(location = 0) out vec4 color;
 
 // in float out_red_color;
-uniform vec4 u_Color;
+in vec4 out_color;
 
 void main() 
 {
-    color = u_Color;
+    color = out_color;
     // color = vec4(out_red_color, 0.5, 1.0, 1.0);
 };

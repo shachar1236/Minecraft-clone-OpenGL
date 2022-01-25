@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <fstream>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <unordered_map>
 
@@ -175,6 +176,20 @@ void Shader::SetUniformVec4f(const std::string& name, const glm::vec4& value)
         uniform_location = location->second;
     }
     glUniform4f(uniform_location, value.x, value.y, value.z, value.w);
+}
+
+void Shader::SetUniformMat4f(const std::string& name, const glm::mat4& value)
+{
+    auto location = uniforms_locations.find(name);
+    int uniform_location = 0;
+    if (location == uniforms_locations.end()) {
+        uniform_location = glGetUniformLocation(program_id, name.c_str());
+        uniforms_locations[name] = uniform_location;
+    } else {
+        uniform_location = location->second;
+    }
+
+    glUniformMatrix4fv(uniform_location, 1, GL_FALSE, glm::value_ptr(value));
 }
 
 std::shared_ptr<Shader> Shader::LoadShader(std::string path) { return Shader::Create(path); }

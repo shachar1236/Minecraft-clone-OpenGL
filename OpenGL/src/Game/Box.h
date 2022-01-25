@@ -14,6 +14,8 @@ public:
     float r = 0;
     float color_jump = 0.8f;
 
+    float rotation = 0.0f;
+
     Box(const std::string& name)
         : Logic::Entity(name) {};
     virtual void Setup() override;
