@@ -1,9 +1,10 @@
 #pragma once
+#include "Core/Core.h"
 #include "Renderer/DrawObject.h"
 #include <string>
 
 namespace Logic {
-class Entity {
+class Entity : public std::enable_shared_from_this<Entity> {
 public:
     unsigned int id;
     std::string name;

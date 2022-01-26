@@ -20,6 +20,8 @@ public:
 
     void recalculateProjectionViewMatrix();
 
+    virtual void cursorPositionEventHandler(const double& xpos, const double& ypos) override;
+
 private:
     glm::mat4 view;
     glm::mat4 proj;
@@ -33,4 +35,11 @@ private:
     glm::vec3 cameraUp;
 
     static std::shared_ptr<spdlog::logger> logger;
+
+    // temporery
+    bool firstMove = true;
+    float pitch;
+    float yaw;
+    float lastX;
+    float lastY;
 };
