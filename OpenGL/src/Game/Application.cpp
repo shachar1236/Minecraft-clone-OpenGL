@@ -56,7 +56,8 @@ int main(void)
         return -1;
     }
 
-    Logic::Input::_window = window;
+    Logic::Input::init(window);
+    Logic::ECS::init(window);
     glDebugMessageCallback(MessageCallback, 0);
     // glEnable(GL_CULL_FACE);
     // glFrontFace(GL_CW);
@@ -64,6 +65,7 @@ int main(void)
 
     std::shared_ptr<Box> box = std::make_shared<Box>("box1");
     Logic::ECS::AddEntity(box);
+    Logic::ECS::CursorPositionEventSubscribers.push_back(box);
 
     std::shared_ptr<Camera> camera = std::make_shared<Camera>(90.0f, 1280.0f / 720);
     Logic::ECS::AddEntity(camera);
@@ -87,7 +89,7 @@ int main(void)
         boxDraw.mesh->shader->SetUniformMat4f("u_Transform", boxDraw.transform->transform);
         boxDraw.mesh->shader->SetUniformMat4f("u_ViewProjection", camera->getViewProjectionMatrix());
 
-        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+        glDrawElements(GL_TRIANGLES, boxDraw.vertexArray->getIndicesCount(), GL_UNSIGNED_INT, nullptr);
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 

@@ -7,11 +7,14 @@
 namespace Logic {
 class Input {
 public:
-    static GLFWwindow* _window;
+    static void init(GLFWwindow* window);
     static std::shared_ptr<spdlog::logger> logger;
 
     static bool isKeyPressed(const unsigned int& key);
     static bool isKeyJustPressed(const unsigned int& key);
     static bool isKeyJustReleased(const unsigned int& key);
+
+private:
+    static GLFWwindow* _window;
 };
 }

@@ -18,6 +18,8 @@ public:
 
     void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& buffer);
 
+    inline unsigned int getIndicesCount() const { return indexBuffer->getCount(); }
+
 private:
     unsigned int id;
     std::shared_ptr<IndexBuffer> indexBuffer;

@@ -1,6 +1,7 @@
 #include "Input.h"
 
 namespace Logic {
+void Input::init(GLFWwindow* window) { _window = window; }
 
 GLFWwindow* Input::_window = nullptr;
 std::shared_ptr<spdlog::logger> Input::logger = Log::createLogger("Input");

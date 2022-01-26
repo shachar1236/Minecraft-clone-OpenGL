@@ -7,6 +7,7 @@ IndexBuffer::IndexBuffer(const unsigned int* buffer, const unsigned int& size, c
     glGenBuffers(1, &id);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, buffer, usage);
+    count = size / sizeof(unsigned int);
 }
 
 IndexBuffer::~IndexBuffer() { glDeleteBuffers(1, &id); }

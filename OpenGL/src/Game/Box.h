@@ -22,4 +22,6 @@ public:
     virtual void Update(const float& deltaTime) override;
 
     virtual DrawObject getDrawObject() override;
+
+    virtual void cursorPositionEventHandler(const double& xpos, const double& ypos) override;
 };

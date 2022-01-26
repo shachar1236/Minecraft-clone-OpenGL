@@ -13,6 +13,9 @@ public:
     void Bind();
     void UnBind();
 
+    inline unsigned int getCount() const { return count; }
+
 private:
     unsigned int id;
+    unsigned int count;
 };

@@ -1,8 +1,11 @@
 #include "Box.h"
+#include "Core/Core.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+
+auto logger = Log::createLogger("Box");
 
 struct Vertex {
     float pos[3];
@@ -146,7 +149,12 @@ void Box::Update(const float& deltaTime)
     }
 
     rotation += deltaTime * 20;
-    // transform->setRotation(rotation, glm::vec3(1.0f));
+    transform->setRotation(rotation, glm::vec3(1.0f));
 }
 
 DrawObject Box::getDrawObject() { return { va, mesh, &(*transform) }; }
+
+void Box::cursorPositionEventHandler(const double& xpos, const double& ypos)
+{
+    // logger->info("Cursor position has changed");
+}
