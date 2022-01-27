@@ -38,3 +38,12 @@ void VertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& buffer)
     buffer->Bind();
     indexBuffer = buffer;
 }
+
+void VertexArray::SetTexture(const std::shared_ptr<Texture>& texture_)
+{
+    glBindVertexArray(id);
+    texture_->Bind();
+    texture = texture_;
+}
+
+std::shared_ptr<Texture> VertexArray::getTexture() { return texture; }

@@ -6,6 +6,9 @@
 struct Transform {
 public:
     glm::mat4 transform;
+
+    Transform() { }
+
     Transform(const glm::mat4& t)
         : transform(t)
         , position(glm::vec3(0.0f))

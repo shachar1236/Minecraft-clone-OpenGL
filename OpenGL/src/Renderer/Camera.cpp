@@ -27,7 +27,7 @@ void Camera::Setup() { Logic::ECS::CursorPositionEventSubscribers.push_back(shar
 
 void Camera::Update(const float& deltaTime)
 {
-    const float speed = 8.0f;
+    const float speed = 4.0f;
     if (Logic::Input::isKeyPressed(GLFW_KEY_W)) {
         position += deltaTime * speed * cameraFront;
         // logger->info("Moving forward");

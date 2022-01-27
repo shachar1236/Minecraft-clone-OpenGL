@@ -1,6 +1,7 @@
 #pragma once
 #include "Logic/Entity.h"
 #include "Renderer/DrawObject.h"
+#include "Renderer/Texture.h"
 
 class Box : public Logic::Entity {
 public:
@@ -9,7 +10,8 @@ public:
     std::shared_ptr<Mesh> mesh;
     std::shared_ptr<VertexBuffer> buffer;
     std::shared_ptr<IndexBuffer> indexBuffer;
-    std::shared_ptr<Transform> transform;
+    std::shared_ptr<Texture> texture;
+    Transform transform;
 
     float r = 0;
     float color_jump = 0.8f;

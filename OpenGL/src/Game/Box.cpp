@@ -28,73 +28,16 @@ struct Vertex {
 
 void Box::Setup()
 {
-    // float positions[] = {
-    //     -0.5f, 0.0f, -0.5f, //
-    //     -0.5f, 0.0f, 0.5f, // top face
-    //     0.5f, 0.0f, 0.5f, //
-    //     0.5f, 0.0f, -0.5f, //
-
-    //     -0.5f, 1.0f, -0.5f, //
-    //     -0.5f, 1.0f, 0.5f, // bottom face
-    //     0.5f, 1.0f, 0.5f, //
-    //     0.5f, 1.0f, -0.5f, //
-
-    //     -0.5f, -0.5f, 0.0f, //
-    //     -0.5f, 0.5f, 0.0f, // front face
-    //     0.5f, 0.5f, 0.0f, //
-    //     0.5f, -0.5f, 0.0f, //
-
-    //     -0.5f, -0.5f, 1.0f, //
-    //     -0.5f, 0.5f, 1.0f, // hide face
-    //     0.5f, 0.5f, 1.0f, //
-    //     0.5f, -0.5f, 1.0f, //
-
-    //     0.0f, -0.5f, -0.5f, //
-    //     0.0f, -0.5f, 0.5f, //
-    //     0.0f, 0.5f, 0.5f, //
-    //     0.0f, 0.5f, -0.5f, //
-
-    //     1.0f, -0.5f, -0.5f, //
-    //     1.0f, -0.5f, 0.5f, //
-    //     1.0f, 0.5f, 0.5f, //
-    //     1.0f, 0.5f, -0.5f, //
-    // };
-
-    // unsigned int indecis[] = {
-    //     0, 1, 2, // first triange
-    //     2, 3, 0, // second triange
-
-    //     4, 5, 6, // first triange
-    //     6, 7, 4, // second triange
-
-    //     8, 9, 10, // first triange
-    //     10, 11, 8, // second triange
-
-    //     12, 13, 14, // first triange
-    //     14, 15, 12 // second triange
-    // };
-
-    // Vertex positions[8];
-
-    // positions[0] = Vertex(0.5f, 0.5f, 0.5f);
-    // positions[1] = Vertex(-0.5f, 0.5f, -0.5f);
-    // positions[2] = Vertex(-0.5f, 0.5f, 0.5f);
-    // positions[3] = Vertex(0.5f, -0.5f, -0.5f);
-    // positions[4] = Vertex(-0.5f, -0.5f, -0.5f);
-    // positions[5] = Vertex(0.5f, 0.5f, -0.5f);
-    // positions[6] = Vertex(0.5f, -0.5f, 0.5f);
-    // positions[7] = Vertex(-0.5f, -0.5f, 0.5f);
-
-    float positions[24] = {
-        //
-        0.5f, 0.5f, 0.5f, //
-        -0.5f, 0.5f, -0.5f, //
-        -0.5f, 0.5f, 0.5f, //
-        0.5f, -0.5f, -0.5f, //
-        -0.5f, -0.5f, -0.5f, //
-        0.5f, 0.5f, -0.5f, //
-        0.5f, -0.5f, 0.5f, //
-        -0.5f, -0.5f, 0.5f //
+    float positions[40] = {
+        // first 3 - positions, next 2 - texture coordinates
+        0.5f, 0.5f, 0.5f, 1.0f, 1.0f, //
+        -0.5f, 0.5f, -0.5f, 1.0f, 1.0f, //
+        -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, //
+        0.5f, -0.5f, -0.5f, 0.0f, 0.0f, //
+        -0.5f, -0.5f, -0.5f, 1.0f, 1.0f, //
+        0.5f, 0.5f, -0.5f, 0.0f, 1.0f, //
+        0.5f, -0.5f, 0.5f, 1.0f, 0.0f, //
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f //
 
     };
 
@@ -111,35 +54,27 @@ void Box::Setup()
         2, 1, 4, //
         0, 2, 7 };
 
-    // float positions[] = {
-    //     //
-    //     -0.5f, -0.5f, //
-    //     0.5f, -0.5f, //
-    //     0.5f, 0.5f, //
-    //     -0.5f, 0.5f, //
-    // };
-
-    // unsigned int indices[6] = {
-    //     //
-    //     0, 1, 2, //
-    //     2, 3, 0 //
-    // };
-
     va = VertexArray::Create();
     va->Bind();
 
     buffer = VertexBuffer::Create((float*)positions, sizeof(positions), GL_STATIC_DRAW);
     buffer->layout.addElement(BufferElement(3, sizeof(float) * 3, GL_FLOAT, GL_FALSE));
+    buffer->layout.addElement(BufferElement(2, sizeof(float) * 2, GL_FLOAT, GL_FALSE));
 
     va->AddVertexBuffer(buffer);
 
     indexBuffer = IndexBuffer::Create(indices, sizeof(indices), GL_STATIC_DRAW);
     va->SetIndexBuffer(indexBuffer);
 
-    mesh = std::make_shared<Mesh>(Shader::Create("res/shaders/Basic.shader"));
+    texture = Texture::Create("res/textures/bedrock.png");
+    va->SetTexture(texture);
 
-    transform = std::make_shared<Transform>(glm::mat4(1.0f));
-    transform->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    mesh = std::make_shared<Mesh>(Shader::Create("res/shaders/Basic.shader"));
+    mesh->unifroms_int["ourTexture"] = 0;
+
+    transform = glm::mat4(1.0f);
+    transform.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    transform.setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
 void Box::Update(const float& deltaTime)
@@ -153,7 +88,7 @@ void Box::Update(const float& deltaTime)
     // transform->setRotation(rotation, glm::vec3(1.0f));
 }
 
-DrawObject Box::getDrawObject() { return { va, mesh, &(*transform) }; }
+DrawObject Box::getDrawObject() { return { va, mesh, &transform }; }
 
 void Box::cursorPositionEventHandler(const double& xpos, const double& ypos)
 {

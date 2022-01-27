@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Libraris\stb_image\stb_image.cpp" />
     <ClCompile Include="src\Logic\Input.cpp" />
     <ClCompile Include="src\Core\Core.cpp" />
     <ClCompile Include="src\Renderer\Camera.cpp" />
@@ -32,11 +33,13 @@
     <ClCompile Include="src\Game\Application.cpp" />
     <ClCompile Include="src\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Renderer\VertexBuffer.cpp" />
+    <ClCompile Include="src\Renderer\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Libraris\stb_image\stb_image.h" />
     <ClInclude Include="src\Logic\Input.h" />
     <ClInclude Include="src\Core\Core.h" />
     <ClInclude Include="src\Renderer\Camera.h" />
@@ -51,6 +54,7 @@
     <ClInclude Include="src\Renderer\VertexArray.h" />
     <ClInclude Include="src\Renderer\VertexBuffer.h" />
     <ClInclude Include="src\Renderer\Transform.h" />
+    <ClInclude Include="src\Renderer\Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

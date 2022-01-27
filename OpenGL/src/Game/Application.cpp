@@ -30,7 +30,6 @@ void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id, GLenum se
 
 int main(void)
 {
-    srand(GetCurrentProcessId());
 
     GLFWwindow* window;
     auto logger = Log::createLogger("Main");
@@ -61,9 +60,9 @@ int main(void)
     Logic::Input::init(window);
     Logic::ECS::init(window);
     glDebugMessageCallback(MessageCallback, 0);
-    // glEnable(GL_CULL_FACE);
-    // glFrontFace(GL_CW);
-    // glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
 
     std::shared_ptr<Box> box = std::make_shared<Box>("box1");
     Logic::ECS::AddEntity(box);
